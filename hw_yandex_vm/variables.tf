@@ -27,5 +27,5 @@ variable "ssh_public_key" {
 
 variable "yc_image_id" {
   type    = string
-  default = "fd8m51h9aeq2r6s7q2u4" 
+  default = "fd8m51h9aeq2r6s7q2u4"
 }
