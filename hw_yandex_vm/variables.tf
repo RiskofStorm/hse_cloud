@@ -8,7 +8,7 @@ variable "folder_id" {
 
 variable "zone" {
   type    = string
-  default = "ru-central1-d"
+  default = "ru-central1-a"
 }
 
 variable "vm_name" {
@@ -27,5 +27,5 @@ variable "ssh_public_key" {
 
 variable "yc_image_id" {
   type    = string
-  default = "fd8m51h9aeq2r6s7q2u4" # пример Ubuntu 22.04 LTS; при необходимости замени
+  default = "fd8m51h9aeq2r6s7q2u4" 
 }
