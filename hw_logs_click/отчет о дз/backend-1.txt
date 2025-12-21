@@ -1,19 +1,13 @@
 ubuntu@fhmmedgja3e3ft5v6tlo:~$ sudo journalctl -u logbroker -f
-Dec 21 12:56:27 fhmmedgja3e3ft5v6tlo python3[10050]: INFO:     158.160.108.15:34378 - "POST /write_log HTTP/1.0" 200 OK
-Dec 21 12:56:27 fhmmedgja3e3ft5v6tlo python3[10050]: INFO:     158.160.108.15:34390 - "POST /write_log HTTP/1.0" 200 OK
-Dec 21 12:56:27 fhmmedgja3e3ft5v6tlo python3[10050]: INFO:     158.160.108.15:34406 - "POST /write_log HTTP/1.0" 200 OK
-Dec 21 12:56:27 fhmmedgja3e3ft5v6tlo python3[10050]: INFO:     158.160.108.15:34398 - "POST /write_log HTTP/1.0" 200 OK
-Dec 21 12:56:27 fhmmedgja3e3ft5v6tlo python3[10050]: INFO:     158.160.108.15:34416 - "POST /write_log HTTP/1.0" 200 OK
-Dec 21 12:56:27 fhmmedgja3e3ft5v6tlo python3[10050]: INFO:     158.160.108.15:34430 - "POST /write_log HTTP/1.0" 200 OK
-Dec 21 12:56:48 fhmmedgja3e3ft5v6tlo python3[10050]: [2025-12-21 12:56:28.232697] Flushed 40
-Dec 21 12:56:48 fhmmedgja3e3ft5v6tlo python3[10050]: INFO:     158.160.108.15:43086 - "POST /write_log HTTP/1.0" 200 OK
-Dec 21 12:57:23 fhmmedgja3e3ft5v6tlo python3[10050]: [2025-12-21 12:56:49.264467] Flushed 1
-Dec 21 12:57:23 fhmmedgja3e3ft5v6tlo python3[10050]: INFO:     158.160.108.15:40192 - "POST /write_log HTTP/1.0" 200 OK
-Dec 21 12:58:17 fhmmedgja3e3ft5v6tlo python3[10050]: [2025-12-21 12:57:23.310938] Flushed 1
-Dec 21 12:58:17 fhmmedgja3e3ft5v6tlo python3[10050]: INFO:     158.160.108.15:36558 - "POST /write_log HTTP/1.0" 200 OK
-Dec 21 13:01:07 fhmmedgja3e3ft5v6tlo python3[10050]: [2025-12-21 12:58:17.383089] Flushed 1
-Dec 21 13:01:07 fhmmedgja3e3ft5v6tlo python3[10050]: INFO:     158.160.108.15:34018 - "POST /write_log HTTP/1.0" 200 OK
-Dec 21 13:01:55 fhmmedgja3e3ft5v6tlo python3[10050]: [2025-12-21 13:01:08.594092] Flushed 1
-Dec 21 13:01:55 fhmmedgja3e3ft5v6tlo python3[10050]: INFO:     95.53.106.102:40262 - "GET /health HTTP/1.1" 404 Not Found
-Dec 21 13:01:59 fhmmedgja3e3ft5v6tlo python3[10050]: INFO:     95.53.106.102:49470 - "GET /health HTTP/1.1" 404 Not Found
-Dec 21 13:02:45 fhmmedgja3e3ft5v6tlo python3[10050]: INFO:     158.160.108.15:39676 - "POST /write_log HTTP/1.0" 200 OK
+Dec 21 13:23:39 fhmmedgja3e3ft5v6tlo python3[10050]: INFO:     1.222.44.250:60012 - "POST /cgi-bin/ViewLog.asp HTTP/1.1" 404 Not Found
+Dec 21 13:30:08 fhmmedgja3e3ft5v6tlo python3[10050]: INFO:     158.160.108.15:51168 - "POST /write_log HTTP/1.0" 200 OK
+Dec 21 13:30:11 fhmmedgja3e3ft5v6tlo python3[10050]: [2025-12-21 13:30:09.702512] Flushed 1
+Dec 21 13:30:11 fhmmedgja3e3ft5v6tlo python3[10050]: INFO:     158.160.108.15:51180 - "POST /write_log HTTP/1.0" 200 OK
+Dec 21 13:32:23 fhmmedgja3e3ft5v6tlo python3[10050]: [2025-12-21 13:30:11.738512] Flushed 1
+Dec 21 13:32:23 fhmmedgja3e3ft5v6tlo python3[10050]: INFO:     158.160.108.15:57178 - "POST /write_log HTTP/1.0" 200 OK
+Dec 21 13:32:25 fhmmedgja3e3ft5v6tlo python3[10050]: [2025-12-21 13:32:23.904758] Flushed 1
+Dec 21 13:32:25 fhmmedgja3e3ft5v6tlo python3[10050]: INFO:     158.160.108.15:57184 - "POST /write_log HTTP/1.0" 200 OK
+Dec 21 13:32:30 fhmmedgja3e3ft5v6tlo python3[10050]: [2025-12-21 13:32:25.930383] Flushed 1
+Dec 21 13:32:30 fhmmedgja3e3ft5v6tlo python3[10050]: INFO:     158.160.108.15:35624 - "POST /write_log HTTP/1.0" 200 OK
+Dec 21 13:33:35 fhmmedgja3e3ft5v6tlo python3[10050]: [2025-12-21 13:32:30.942911] Flushed 1
+Dec 21 13:33:35 fhmmedgja3e3ft5v6tlo python3[10050]: INFO:     158.160.108.15:53336 - "POST /write_log HTTP/1.0" 200 OK

@@ -42,4 +42,15 @@ winter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POS
 curl: (7) Failed to connect to 158.160.108.15 port 80 after 0 ms: Couldn't connect to server
 winter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POST http://158.160.108.15/write_log -d "THE END datedate!"
 OKwinter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POST http://158.160.108.15/write_log -d "THE END datedate!"
-OKwinter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ 
+OKwinter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POST http://158.160.108.15/write_log -d "THE END datedate!"
+OKwinter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POST http://158.160.108.15/write_log -d "THE END datedate!"
+OKwinter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POST http://158.160.108.15/write_log -d "THE END datedate!"
+OKwinter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POST http://158.160.108.15/write_log -d "THE END datedate!"
+OKwinter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POST http://158.160.108.15/write_log -d "THE END datedate!"
+OKwinter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POST http://158.160.108.15/write_log -d "THE END datedate!"
+OKwinter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POST http://158.160.108.15/write_log -d "THE END datedate!"
+OKwinter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POST http://158.160.108.15/write_log -d "THE END datedate!"
+OKwinter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POST http://158.160.108.15/write_log -d "THE END dated5555555ate!"
+OKwinter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POST http://158.160.108.15/write_log -d "THE END dated55551111111111555ate!"
+OKwinter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POST http://158.160.108.15/write_log -d "THE END dated555511111111555511555ate!"
+OKwinter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POST http://158.160.108.15/write_log -d "THE END dated5555111111155551555511555ate!"
