@@ -1,0 +1,14 @@
+#cloud-config
+package_update: true
+packages:
+  - docker.io
+
+runcmd:
+  - systemctl enable docker
+  - systemctl start docker
+  - docker run -d --name logbroker \
+      -p 8080:8080 \
+      -e CLICKHOUSE_HOST=10.0.1.10 \
+      -e CLICKHOUSE_DB=default \
+      -e CLICKHOUSE_TABLE=logs \
+      cr.yandex/<repo>/logbroker:latest

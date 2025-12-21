@@ -1,0 +1,640 @@
+winter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ terraform apply
+data.yandex_compute_image.ubuntu: Reading...
+data.yandex_compute_image.ubuntu: Read complete after 1s [id=fd8oik3g61qm14kcklca]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # yandex_compute_instance.backend[0] will be created
+  + resource "yandex_compute_instance" "backend" {
+      + created_at                = (known after apply)
+      + folder_id                 = (known after apply)
+      + fqdn                      = (known after apply)
+      + gpu_cluster_id            = (known after apply)
+      + hardware_generation       = (known after apply)
+      + hostname                  = (known after apply)
+      + id                        = (known after apply)
+      + maintenance_grace_period  = (known after apply)
+      + maintenance_policy        = (known after apply)
+      + metadata                  = {
+          + "ssh-keys"  = "ubuntu:ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINgy8msqbkxSVjqOxKFx6Q9ChXUowJXG4k6VZTWKfjtl ad"
+          + "user-data" = <<-EOT
+                #cloud-config
+                package_update: true
+                packages:
+                  - docker.io
+                  - python3-pip
+                
+                runcmd:
+                  - systemctl enable docker
+                  - systemctl start docker
+                  - mkdir -p /var/lib/logbroker
+                  - |
+                    cat > /tmp/logbroker.py << 'EOF'
+                import uvicorn
+                from fastapi import FastAPI, Request
+                from fastapi.responses import PlainTextResponse
+                import sqlite3
+                import asyncio
+                from datetime import datetime
+                import threading
+                import time
+                
+                app = FastAPI()
+                DB_PATH = '/var/lib/logbroker/logs.db'
+                
+                conn = sqlite3.connect(DB_PATH, check_same_thread=False)
+                conn.execute('CREATE TABLE IF NOT EXISTS logs (timestamp TEXT, data TEXT)')
+                conn.commit()
+                
+                def flush_loop():
+                    while True:
+                        time.sleep(1)
+                        cur = conn.cursor()
+                        cur.execute("SELECT * FROM logs")
+                        logs = cur.fetchall()
+                        if logs:
+                            print(f"[{datetime.now()}] Flushing {len(logs)} logs to ClickHouse")
+                            cur.execute("DELETE FROM logs")
+                            conn.commit()
+                
+                @app.post("/write_log")
+                async def write_log(request: Request):
+                    data = await request.body()
+                    timestamp = datetime.now().isoformat()
+                    conn.execute("INSERT INTO logs VALUES (?, ?)", (timestamp, data.decode()))
+                    conn.commit()
+                    return PlainTextResponse("OK")
+                
+                if __name__ == "__main__":
+                    threading.Thread(target=flush_loop, daemon=True).start()
+                    uvicorn.run(app, host="0.0.0.0", port=8080)
+                EOF
+                  - pip3 install fastapi uvicorn
+                  - cd /var/lib/logbroker && nohup python3 /tmp/logbroker.py > logbroker.log 2>&1 &
+            EOT
+        }
+      + name                      = "hw2-backend-0"
+      + network_acceleration_type = "standard"
+      + platform_id               = "standard-v1"
+      + status                    = (known after apply)
+      + zone                      = (known after apply)
+
+      + boot_disk {
+          + auto_delete = true
+          + device_name = (known after apply)
+          + disk_id     = (known after apply)
+          + mode        = (known after apply)
+
+          + initialize_params {
+              + block_size  = (known after apply)
+              + description = (known after apply)
+              + image_id    = "fd8oik3g61qm14kcklca"
+              + name        = (known after apply)
+              + size        = 20
+              + snapshot_id = (known after apply)
+              + type        = "network-hdd"
+            }
+        }
+
+      + metadata_options (known after apply)
+
+      + network_interface {
+          + index          = (known after apply)
+          + ip_address     = "10.0.1.20"
+          + ipv4           = true
+          + ipv6           = (known after apply)
+          + ipv6_address   = (known after apply)
+          + mac_address    = (known after apply)
+          + nat            = true
+          + nat_ip_address = (known after apply)
+          + nat_ip_version = (known after apply)
+          + subnet_id      = (known after apply)
+        }
+
+      + placement_policy (known after apply)
+
+      + resources {
+          + core_fraction = 100
+          + cores         = 2
+          + memory        = 4
+        }
+
+      + scheduling_policy (known after apply)
+    }
+
+  # yandex_compute_instance.backend[1] will be created
+  + resource "yandex_compute_instance" "backend" {
+      + created_at                = (known after apply)
+      + folder_id                 = (known after apply)
+      + fqdn                      = (known after apply)
+      + gpu_cluster_id            = (known after apply)
+      + hardware_generation       = (known after apply)
+      + hostname                  = (known after apply)
+      + id                        = (known after apply)
+      + maintenance_grace_period  = (known after apply)
+      + maintenance_policy        = (known after apply)
+      + metadata                  = {
+          + "ssh-keys"  = "ubuntu:ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINgy8msqbkxSVjqOxKFx6Q9ChXUowJXG4k6VZTWKfjtl ad"
+          + "user-data" = <<-EOT
+                #cloud-config
+                package_update: true
+                packages:
+                  - docker.io
+                  - python3-pip
+                
+                runcmd:
+                  - systemctl enable docker
+                  - systemctl start docker
+                  - mkdir -p /var/lib/logbroker
+                  - |
+                    cat > /tmp/logbroker.py << 'EOF'
+                import uvicorn
+                from fastapi import FastAPI, Request
+                from fastapi.responses import PlainTextResponse
+                import sqlite3
+                import asyncio
+                from datetime import datetime
+                import threading
+                import time
+                
+                app = FastAPI()
+                DB_PATH = '/var/lib/logbroker/logs.db'
+                
+                conn = sqlite3.connect(DB_PATH, check_same_thread=False)
+                conn.execute('CREATE TABLE IF NOT EXISTS logs (timestamp TEXT, data TEXT)')
+                conn.commit()
+                
+                def flush_loop():
+                    while True:
+                        time.sleep(1)
+                        cur = conn.cursor()
+                        cur.execute("SELECT * FROM logs")
+                        logs = cur.fetchall()
+                        if logs:
+                            print(f"[{datetime.now()}] Flushing {len(logs)} logs to ClickHouse")
+                            cur.execute("DELETE FROM logs")
+                            conn.commit()
+                
+                @app.post("/write_log")
+                async def write_log(request: Request):
+                    data = await request.body()
+                    timestamp = datetime.now().isoformat()
+                    conn.execute("INSERT INTO logs VALUES (?, ?)", (timestamp, data.decode()))
+                    conn.commit()
+                    return PlainTextResponse("OK")
+                
+                if __name__ == "__main__":
+                    threading.Thread(target=flush_loop, daemon=True).start()
+                    uvicorn.run(app, host="0.0.0.0", port=8080)
+                EOF
+                  - pip3 install fastapi uvicorn
+                  - cd /var/lib/logbroker && nohup python3 /tmp/logbroker.py > logbroker.log 2>&1 &
+            EOT
+        }
+      + name                      = "hw2-backend-1"
+      + network_acceleration_type = "standard"
+      + platform_id               = "standard-v1"
+      + status                    = (known after apply)
+      + zone                      = (known after apply)
+
+      + boot_disk {
+          + auto_delete = true
+          + device_name = (known after apply)
+          + disk_id     = (known after apply)
+          + mode        = (known after apply)
+
+          + initialize_params {
+              + block_size  = (known after apply)
+              + description = (known after apply)
+              + image_id    = "fd8oik3g61qm14kcklca"
+              + name        = (known after apply)
+              + size        = 20
+              + snapshot_id = (known after apply)
+              + type        = "network-hdd"
+            }
+        }
+
+      + metadata_options (known after apply)
+
+      + network_interface {
+          + index          = (known after apply)
+          + ip_address     = "10.0.1.21"
+          + ipv4           = true
+          + ipv6           = (known after apply)
+          + ipv6_address   = (known after apply)
+          + mac_address    = (known after apply)
+          + nat            = true
+          + nat_ip_address = (known after apply)
+          + nat_ip_version = (known after apply)
+          + subnet_id      = (known after apply)
+        }
+
+      + placement_policy (known after apply)
+
+      + resources {
+          + core_fraction = 100
+          + cores         = 2
+          + memory        = 4
+        }
+
+      + scheduling_policy (known after apply)
+    }
+
+  # yandex_compute_instance.clickhouse will be created
+  + resource "yandex_compute_instance" "clickhouse" {
+      + created_at                = (known after apply)
+      + folder_id                 = (known after apply)
+      + fqdn                      = (known after apply)
+      + gpu_cluster_id            = (known after apply)
+      + hardware_generation       = (known after apply)
+      + hostname                  = (known after apply)
+      + id                        = (known after apply)
+      + maintenance_grace_period  = (known after apply)
+      + maintenance_policy        = (known after apply)
+      + metadata                  = {
+          + "ssh-keys"  = "ubuntu:ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINgy8msqbkxSVjqOxKFx6Q9ChXUowJXG4k6VZTWKfjtl ad"
+          + "user-data" = <<-EOT
+                #cloud-config
+                package_update: true
+                packages:
+                  - docker.io
+                
+                runcmd:
+                  - systemctl enable docker
+                  - systemctl start docker
+                  - mkdir -p /var/lib/clickhouse
+                  - docker run -d --name clickhouse-server \
+                      --ulimit nofile=262144:262144 \
+                      -p 8123:8123 -p 9000:9000 \
+                      -v /var/lib/clickhouse:/var/lib/clickhouse \
+                      --ip 10.0.1.10 \
+                      yandex/clickhouse-server
+                  - |
+                    until docker exec clickhouse-server clickhouse-client --query "SELECT 1"; do
+                      sleep 5
+                    done
+                    docker exec clickhouse-server clickhouse-client --query "CREATE TABLE IF NOT EXISTS default.logs (
+                      timestamp DateTime, data String
+                    ) ENGINE = MergeTree ORDER BY timestamp"
+            EOT
+        }
+      + name                      = "hw2-clickhouse"
+      + network_acceleration_type = "standard"
+      + platform_id               = "standard-v1"
+      + status                    = (known after apply)
+      + zone                      = (known after apply)
+
+      + boot_disk {
+          + auto_delete = true
+          + device_name = (known after apply)
+          + disk_id     = (known after apply)
+          + mode        = (known after apply)
+
+          + initialize_params {
+              + block_size  = (known after apply)
+              + description = (known after apply)
+              + image_id    = "fd8oik3g61qm14kcklca"
+              + name        = (known after apply)
+              + size        = 50
+              + snapshot_id = (known after apply)
+              + type        = "network-hdd"
+            }
+        }
+
+      + metadata_options (known after apply)
+
+      + network_interface {
+          + index          = (known after apply)
+          + ip_address     = "10.0.1.10"
+          + ipv4           = true
+          + ipv6           = (known after apply)
+          + ipv6_address   = (known after apply)
+          + mac_address    = (known after apply)
+          + nat            = true
+          + nat_ip_address = (known after apply)
+          + nat_ip_version = (known after apply)
+          + subnet_id      = (known after apply)
+        }
+
+      + placement_policy (known after apply)
+
+      + resources {
+          + core_fraction = 100
+          + cores         = 4
+          + memory        = 8
+        }
+
+      + scheduling_policy (known after apply)
+    }
+
+  # yandex_compute_instance.nat will be created
+  + resource "yandex_compute_instance" "nat" {
+      + created_at                = (known after apply)
+      + folder_id                 = (known after apply)
+      + fqdn                      = (known after apply)
+      + gpu_cluster_id            = (known after apply)
+      + hardware_generation       = (known after apply)
+      + hostname                  = (known after apply)
+      + id                        = (known after apply)
+      + maintenance_grace_period  = (known after apply)
+      + maintenance_policy        = (known after apply)
+      + metadata                  = {
+          + "ssh-keys"  = "ubuntu:ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINgy8msqbkxSVjqOxKFx6Q9ChXUowJXG4k6VZTWKfjtl ad"
+          + "user-data" = <<-EOT
+                #cloud-config
+                runcmd:
+                  - sysctl -w net.ipv4.ip_forward=1
+                  - iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+                  - echo 'net.ipv4.ip_forward=1' >> /etc/sysctl.conf
+            EOT
+        }
+      + name                      = "hw2-nat"
+      + network_acceleration_type = "standard"
+      + platform_id               = "standard-v1"
+      + status                    = (known after apply)
+      + zone                      = (known after apply)
+
+      + boot_disk {
+          + auto_delete = true
+          + device_name = (known after apply)
+          + disk_id     = (known after apply)
+          + mode        = (known after apply)
+
+          + initialize_params {
+              + block_size  = (known after apply)
+              + description = (known after apply)
+              + image_id    = "fd8oik3g61qm14kcklca"
+              + name        = (known after apply)
+              + size        = 20
+              + snapshot_id = (known after apply)
+              + type        = "network-hdd"
+            }
+        }
+
+      + metadata_options (known after apply)
+
+      + network_interface {
+          + index          = (known after apply)
+          + ip_address     = (known after apply)
+          + ipv4           = true
+          + ipv6           = (known after apply)
+          + ipv6_address   = (known after apply)
+          + mac_address    = (known after apply)
+          + nat            = true
+          + nat_ip_address = (known after apply)
+          + nat_ip_version = (known after apply)
+          + subnet_id      = (known after apply)
+        }
+
+      + placement_policy (known after apply)
+
+      + resources {
+          + core_fraction = 100
+          + cores         = 2
+          + memory        = 2
+        }
+
+      + scheduling_policy (known after apply)
+    }
+
+  # yandex_compute_instance.nginx will be created
+  + resource "yandex_compute_instance" "nginx" {
+      + created_at                = (known after apply)
+      + folder_id                 = (known after apply)
+      + fqdn                      = (known after apply)
+      + gpu_cluster_id            = (known after apply)
+      + hardware_generation       = (known after apply)
+      + hostname                  = (known after apply)
+      + id                        = (known after apply)
+      + maintenance_grace_period  = (known after apply)
+      + maintenance_policy        = (known after apply)
+      + metadata                  = {
+          + "ssh-keys"  = "ubuntu:ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINgy8msqbkxSVjqOxKFx6Q9ChXUowJXG4k6VZTWKfjtl ad"
+          + "user-data" = <<-EOT
+                #cloud-config
+                package_update: true
+                packages:
+                  - nginx
+                  - jq
+                
+                runcmd:
+                  - |
+                    timeout=300
+                    elapsed=0
+                    BACKENDS=""
+                    while [ $elapsed -lt $timeout ]; do
+                      CANDIDATES=$(yc compute instance list --format json | jq -r '.[] | select(.name | startswith("hw2-backend")) | .network_interfaces[0].primary_v4_address.address' | grep -E '^10\.0\.1\.(20|21)$' || true)
+                      if [ -n "$CANDIDATES" ]; then
+                        BACKENDS=$(echo "$CANDIDATES" | head -2 | sed 's/^/server /;s/$/:8080;/')
+                        echo "Found backends: $BACKENDS"
+                        break
+                      fi
+                      sleep 10
+                      elapsed=$((elapsed + 10))
+                    done
+                    
+                    if [ -z "$BACKENDS" ]; then
+                      BACKENDS="server 127.0.0.1:8080;"
+                      echo "No backends found, using dummy"
+                    fi
+                    
+                    cat > /etc/nginx/nginx.conf <<EOF
+                events {
+                  worker_connections 1024;
+                }
+                
+                http {
+                  upstream logbroker_backends {
+                $BACKENDS
+                  }
+                  
+                  server {
+                    listen 80 default_server;
+                    server_name _;
+                    
+                    location /write_log {
+                      proxy_pass http://logbroker_backends/write_log;
+                      proxy_set_header Host \$host;
+                      proxy_set_header X-Real-IP \$remote_addr;
+                      proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+                      proxy_set_header X-Forwarded-Proto \$scheme;
+                    }
+                    
+                    location /status {
+                      access_log off;
+                      return 200 "NGINX OK\\n";
+                      add_header Content-Type text/plain;
+                    }
+                    
+                    location / {
+                      proxy_pass http://logbroker_backends;
+                      proxy_set_header Host \$host;
+                      proxy_set_header X-Real-IP \$remote_addr;
+                      proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+                      proxy_set_header X-Forwarded-Proto \$scheme;
+                    }
+                  }
+                }
+                EOF
+                    
+                    nginx -t && systemctl restart nginx
+                    if [ $? -ne 0 ]; then
+                      journalctl -u nginx -n 50 --no-pager
+                      exit 1
+                    fi
+                    
+                    echo "NGINX started successfully at $(date)"
+                    curl -X POST http://localhost/write_log -d "nginx startup test" || echo "Local test failed"
+            EOT
+        }
+      + name                      = "hw2-nginx"
+      + network_acceleration_type = "standard"
+      + platform_id               = "standard-v1"
+      + status                    = (known after apply)
+      + zone                      = (known after apply)
+
+      + boot_disk {
+          + auto_delete = true
+          + device_name = (known after apply)
+          + disk_id     = (known after apply)
+          + mode        = (known after apply)
+
+          + initialize_params {
+              + block_size  = (known after apply)
+              + description = (known after apply)
+              + image_id    = "fd8oik3g61qm14kcklca"
+              + name        = (known after apply)
+              + size        = 20
+              + snapshot_id = (known after apply)
+              + type        = "network-hdd"
+            }
+        }
+
+      + metadata_options (known after apply)
+
+      + network_interface {
+          + index          = (known after apply)
+          + ip_address     = (known after apply)
+          + ipv4           = true
+          + ipv6           = (known after apply)
+          + ipv6_address   = (known after apply)
+          + mac_address    = (known after apply)
+          + nat            = true
+          + nat_ip_address = (known after apply)
+          + nat_ip_version = (known after apply)
+          + subnet_id      = (known after apply)
+        }
+
+      + placement_policy (known after apply)
+
+      + resources {
+          + core_fraction = 100
+          + cores         = 2
+          + memory        = 2
+        }
+
+      + scheduling_policy (known after apply)
+    }
+
+  # yandex_vpc_network.hw2_net will be created
+  + resource "yandex_vpc_network" "hw2_net" {
+      + created_at                = (known after apply)
+      + default_security_group_id = (known after apply)
+      + folder_id                 = (known after apply)
+      + id                        = (known after apply)
+      + labels                    = (known after apply)
+      + name                      = "hw2-network"
+      + subnet_ids                = (known after apply)
+    }
+
+  # yandex_vpc_subnet.hw2_subnet will be created
+  + resource "yandex_vpc_subnet" "hw2_subnet" {
+      + created_at     = (known after apply)
+      + folder_id      = (known after apply)
+      + id             = (known after apply)
+      + labels         = (known after apply)
+      + name           = "hw2-subnet"
+      + network_id     = (known after apply)
+      + v4_cidr_blocks = [
+          + "10.0.1.0/24",
+        ]
+      + v6_cidr_blocks = (known after apply)
+      + zone           = "ru-central1-a"
+    }
+
+Plan: 7 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + nat_public_ip   = (known after apply)
+  + nginx_public_ip = (known after apply)
+╷
+│ Warning: Value for undeclared variable
+│ 
+│ The root module does not declare a variable named "cloud_id" but a value was found in file "terraform.tfvars". If you meant to use this value, add a "variable" block to the
+│ configuration.
+│ 
+│ To silence these warnings, use TF_VAR_... environment variables to provide certain "global" settings to all configurations in your organization. To reduce the verbosity of these
+│ warnings, use the -compact-warnings option.
+╵
+╷
+│ Warning: Value for undeclared variable
+│ 
+│ The root module does not declare a variable named "folder_id" but a value was found in file "terraform.tfvars". If you meant to use this value, add a "variable" block to the
+│ configuration.
+│ 
+│ To silence these warnings, use TF_VAR_... environment variables to provide certain "global" settings to all configurations in your organization. To reduce the verbosity of these
+│ warnings, use the -compact-warnings option.
+╵
+╷
+│ Warning: Values for undeclared variables
+│ 
+│ In addition to the other similar warnings shown, 1 other variable(s) defined without being declared.
+╵
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+yandex_vpc_network.hw2_net: Creating...
+yandex_vpc_network.hw2_net: Creation complete after 3s [id=enp1sjg14u1iv1252p83]
+yandex_vpc_subnet.hw2_subnet: Creating...
+yandex_vpc_subnet.hw2_subnet: Creation complete after 1s [id=e9bhtj4g966ebbpodcgl]
+yandex_compute_instance.backend[0]: Creating...
+yandex_compute_instance.backend[1]: Creating...
+yandex_compute_instance.nat: Creating...
+yandex_compute_instance.nginx: Creating...
+yandex_compute_instance.clickhouse: Creating...
+yandex_compute_instance.clickhouse: Still creating... [00m10s elapsed]
+yandex_compute_instance.nat: Still creating... [00m10s elapsed]
+yandex_compute_instance.nginx: Still creating... [00m10s elapsed]
+yandex_compute_instance.backend[1]: Still creating... [00m10s elapsed]
+yandex_compute_instance.backend[0]: Still creating... [00m10s elapsed]
+yandex_compute_instance.backend[0]: Still creating... [00m20s elapsed]
+yandex_compute_instance.backend[1]: Still creating... [00m20s elapsed]
+yandex_compute_instance.nat: Still creating... [00m20s elapsed]
+yandex_compute_instance.nginx: Still creating... [00m20s elapsed]
+yandex_compute_instance.clickhouse: Still creating... [00m20s elapsed]
+yandex_compute_instance.clickhouse: Still creating... [00m30s elapsed]
+yandex_compute_instance.nat: Still creating... [00m30s elapsed]
+yandex_compute_instance.nginx: Still creating... [00m30s elapsed]
+yandex_compute_instance.backend[1]: Still creating... [00m30s elapsed]
+yandex_compute_instance.backend[0]: Still creating... [00m30s elapsed]
+yandex_compute_instance.clickhouse: Creation complete after 35s [id=fhmtmfkbeot5vr0d9bmv]
+yandex_compute_instance.nat: Creation complete after 36s [id=fhmril7l8s55ot00krsd]
+yandex_compute_instance.nginx: Creation complete after 38s [id=fhmdhrnu668mvcpgrb7g]
+yandex_compute_instance.backend[0]: Still creating... [00m40s elapsed]
+yandex_compute_instance.backend[1]: Still creating... [00m40s elapsed]
+yandex_compute_instance.backend[1]: Creation complete after 42s [id=fhmmedgja3e3ft5v6tlo]
+yandex_compute_instance.backend[0]: Creation complete after 44s [id=fhmtp0qa17aih4tmjm6q]
+
+Apply complete! Resources: 7 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+nat_public_ip = "46.21.246.31"
+nginx_public_ip = "158.160.108.15"

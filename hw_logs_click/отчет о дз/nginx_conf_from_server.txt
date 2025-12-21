@@ -1,0 +1,18 @@
+winter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ ssh ubuntu@158.160.108.15 "sudo cat /etc/nginx/nginx.conf"
+events { worker_connections 1024; }
+http {
+  upstream logbroker_backends {
+    server 178.154.229.38:8080;
+    server 62.84.119.45:8080;
+  }
+  server {
+    listen 80 default_server;
+    location /write_log {
+      proxy_pass http://logbroker_backends/write_log;
+      proxy_set_header Host $host;
+    }
+    location /status {
+      return 200 "NGINX OK";
+    }
+  }
+}

@@ -1,0 +1,45 @@
+winter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POST http://158.160.108.15/write_log -d "пишу лог по дз 2 $(date)"
+OKwinter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POST http://158.160.108.15/write_log -d "пишу лог по дз 23 $(date)"
+OKwinter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POST http://158.160.108.15/write_log -d "пишу лог по дз 2  4232 $(date)"
+OKwinter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POST http://158.160.108.15/write_log -d "пишу лог по дз 2  надеюсь 2ой заработал $(date)"
+OKwinter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POST http://158.160.108.15/write_log -d "пишу лог по дз 2  надеюсь 2ой заработал $(date)"
+OKwinter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POST http://158.160.108.15/write_log -d "пишу лог по дз 2  надеюсь 2ой заработ$(date)"
+OKwinter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POST http://158.160.108.15/write_log -d "пишу лог по дз 2  надеюсь 2ой зарт$(date)"
+OKwinter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POST http://158.160.108.15/write_log -d "пишу лог по дз 2  надеюсь 2ой заработ$(date)"
+OKwinter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POST http://158.160.108.15/write_log -d "пишу лог по дз 2  надеюсь 2ой зарт$(date)"
+OKwinter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POST http://158.160.108.15/write_log -d "пишу лог по дз 2  надеюсь 2ой заработ$(date)"
+OKwinter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POST http://158.160.108.15/write_log -d "пишу лог по дз 2  надеюсь 2ой зарт$(date)"
+OKwinter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POST http://158.160.108.15/write_log -d "пишу лог по дз 2  надеюсь 2ой заработ$(date)"
+OKwinter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POST http://158.160.108.15/write_log -d "пишу лог по дз 2  надеюсь 2ой зарт$(date)"
+OKwinter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POST http://158.160.108.15/write_log -d "пишу лог по дз 2  надеюсь 2ой заработ$(date)"
+OKwinter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POST http://158.160.108.15/write_log -d "пишу лог по дз 2  надеюсь 2ой заработ$(date)"
+OKwinter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POST http://158.160.108.15/write_log -d "пишу лог по дз 2  надеюсь 2ой зарт$(date)"
+OKwinter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POST http://158.160.108.15/write_log -d "пишу лог по дз 2  надеюсь 2ой заработ$(date)"
+OKwinter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POST http://158.160.108.15/write_log -d "пишу лог по дз 2  надеюсь 2ой заработ$(date)"
+OKwinter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POST http://158.160.108.15/write_log -d "THE END"
+OKwinter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POST http://158.160.108.15/write_log -d "THE END"
+OKwinter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POST http://158.160.108.15/write_log -d "THE END"
+OKwinter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POST http://158.160.108.15/write_log -d "THE END" | echo '$(date)'
+$(date)
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100     9  100     2  100     7     14     51 --:--:-- --:--:-- --:--:--    66
+curl: Failed writing body
+winter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POST http://158.160.108.15/write_log -d "THE END"
+OKwinter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ time
+
+real	0m0.000s
+user	0m0.000s
+sys	0m0.000s
+winter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ date
+Sun Dec 21 04:03:09 PM MSK 2025
+winter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POST http://158.160.108.15/write_log -d "THE END !!!!!"
+curl -X POST http://158.160.108.15/write_log -d "THE END datedate!"
+curl: (7) Failed to connect to 158.160.108.15 port 80 after 2063 ms: Couldn't connect to server
+winter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POST http://158.160.108.15/write_log -d "THE END datedate!"
+curl: (7) Failed to connect to 158.160.108.15 port 80 after 0 ms: Couldn't connect to server
+winter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POST http://158.160.108.15/write_log -d "THE END datedate!"
+curl: (7) Failed to connect to 158.160.108.15 port 80 after 0 ms: Couldn't connect to server
+winter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POST http://158.160.108.15/write_log -d "THE END datedate!"
+OKwinter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ curl -X POST http://158.160.108.15/write_log -d "THE END datedate!"
+OKwinter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ 

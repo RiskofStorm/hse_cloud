@@ -1,0 +1,21 @@
+winter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ yc compute instance list
++----------------------+----------------+---------------+---------+----------------+-------------+
+|          ID          |      NAME      |    ZONE ID    | STATUS  |  EXTERNAL IP   | INTERNAL IP |
++----------------------+----------------+---------------+---------+----------------+-------------+
+| fhmdhrnu668mvcpgrb7g | hw2-nginx      | ru-central1-a | RUNNING | 158.160.108.15 | 10.0.1.29   |
+| fhmmedgja3e3ft5v6tlo | hw2-backend-1  | ru-central1-a | RUNNING | 62.84.119.45   | 10.0.1.21   |
+| fhmril7l8s55ot00krsd | hw2-nat        | ru-central1-a | RUNNING | 46.21.246.31   | 10.0.1.22   |
+| fhmtmfkbeot5vr0d9bmv | hw2-clickhouse | ru-central1-a | RUNNING | 158.160.118.28 | 10.0.1.10   |
+| fhmtp0qa17aih4tmjm6q | hw2-backend-0  | ru-central1-a | RUNNING | 178.154.229.38 | 10.0.1.20   |
++----------------------+----------------+---------------+---------+----------------+-------------+
+
+winter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ yc vpc network list
++----------------------+-------------+
+|          ID          |    NAME     |
++----------------------+-------------+
+| enp1sjg14u1iv1252p83 | hw2-network |
+| enpu3nss4hsidn0d9epc | default     |
++----------------------+-------------+
+
+winter@winteSUS-TUF-Gaming:~/repo/hse_cloud/hw_logs_click/terraform$ 
+
